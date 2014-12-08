@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="wxpay_scanpay_java_sdk_proj:jar">
+    <output-path>$PROJECT_DIR$/../../wxpay_scanpay_java_demo/lib</output-path>
+    <root id="archive" name="wxpay_scanpay_java_sdk_proj.jar">
+      <element id="module-output" name="wxpay_scanpay_java_sdk_proj" />
+    </root>
+  </artifact>
+</component>
