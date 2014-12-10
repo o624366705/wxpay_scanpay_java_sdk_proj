@@ -9,7 +9,8 @@
 2. [一张图看懂整个SDK的结构](#user-content-一张图看懂整个sdk的结构)
      1. [通用层](#user-content-1通用层)
      2. [协议层](#user-content-2协议层)
-     3. [服务层](#user-content-3服务层)
+     3. [服务层](#user-content-3服务层)  
+     4. [业务层](#user-content-4业务层)
 3. [如何使用这个SDK](#user-content-如何使用该sdk)
 
 
@@ -20,16 +21,16 @@
 2. 第二步收银员在商户系统操作生成支付订单，用户确认支付金额；
 3. 第三步商户收银员用扫码设备扫描用户的条码/二维码，商户收银系统提交支付；
 4. 第四步微信支付后台系统收到支付请求，根据验证密码规则判断是否验证用户的支付密码，不需要验证密码的交易直接发起扣款，需要验证密码的交易会弹出密码输入框（如图5.2所示）。支付成功后微信端会弹出成功页面（如图5.3所示），支付失败会弹出错误提示。
-![img](https://raw.githubusercontent.com/grz/wxpay_scanpay_java_sdk/master/doc/asset/scanpay.jpg "scanpay") 
+![img](https://raw.githubusercontent.com/grz/wxpay_scanpay_java_sdk_proj/master/docs/asset/scanpay.jpg "scanpay") 
 
 ## 一张图看懂整个SDK的结构：
-![img](https://raw.githubusercontent.com/grz/wxpay_scanpay_java_sdk/master/doc/asset/scanpay_sdk_structure.png "scanpay_sdk") 
+![img](https://raw.githubusercontent.com/grz/wxpay_scanpay_java_sdk_proj/master/docs/asset/scanpay_sdk_structure.png "scanpay_sdk") 
 
 ## SDK层级详解：
 
 ### 1）通用层
 
-![img](https://raw.githubusercontent.com/grz/wxpay_scanpay_java_sdk/master/doc/asset/common_layer.png "common_layer") 
+![img](https://raw.githubusercontent.com/grz/wxpay_scanpay_java_sdk_proj/master/docs/asset/common_layer.png "common_layer") 
 这里封装了很多非常基础的组件，供上层服务调用，其中包括以下组件：  
 
 1.  基础配置组件（Configure）
@@ -53,7 +54,7 @@
 
 ### 2）协议层
 
-![img](https://raw.githubusercontent.com/grz/wxpay_scanpay_java_sdk/master/doc/asset/protocol_layer.png "protocol_layer")
+![img](https://raw.githubusercontent.com/grz/wxpay_scanpay_java_sdk_proj/master/docs/asset/protocol_layer.png "protocol_layer")
 这里跟API文档定义的字段进行一一对应，协议层这里分为两部分：  
 
 *   第一部分是“请求数据”，这里定义了每一个API请求时需要传过去的具体数据字段；  
@@ -63,7 +64,7 @@
 
 ### 3）服务层
 
-![img](https://raw.githubusercontent.com/grz/wxpay_scanpay_java_sdk/master/doc/asset/service_layer.png "service_layer")
+![img](https://raw.githubusercontent.com/grz/wxpay_scanpay_java_sdk_proj/master/docs/asset/service_layer.png "service_layer")
 这里已经根据API文档封装好具体服务，供开发者直接调用。  
 例如，以下代码直接调用PayService.request提交支付请求，商户只需要从自己的系统生成该服务提交协议里面要求的数据项即可：  
 
@@ -83,7 +84,11 @@ payServiceResponseString = PayService.request(
 ```
 
 ### 4）业务层
-![img](https://raw.githubusercontent.com/grz/wxpay_scanpay_java_sdk/master/doc/asset/business_layer.png "business_layer")
+![img](https://raw.githubusercontent.com/grz/wxpay_scanpay_java_sdk_proj/master/docs/asset/business_layer.png "business_layer")  
+业务层是比服务更加高级的封装。业务层通过服务层向API提交请求，拿到API的返回数据之后会对返回数据做一些数据解析、签名校验、出错判断等操作。  
+对于像“被扫支付”这种比较复杂和常用的业务，这里特别封装了官方建议的最佳实践流程。里面涵盖了“支付”、“支付查询”、“撤销”等几个服务和建议的流程、轮询次数、轮询间隔等。商户开发可以直接使用，也可以通过修改里面的配置来自定义自己的流程。
+
+
 
 ## 如何使用该SDK：   
 请直接下载demo，demo那边也有详细的指引，商户用demo中完善的代码进行补充流程处理就可以了。[点此获取demo](https://github.com/grz/wxpay_scanpay_java_demo)        
