@@ -12,10 +12,10 @@ import com.tencent.protocol.pay_query_protocol.ScanPayQueryReqData;
  * Date: 2014/10/29
  * Time: 16:04
  */
-public class ScanPayQueryService {
+public class ScanPayQueryService extends BaseService{
 
-    public ScanPayQueryService(){
-
+    public ScanPayQueryService() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        super(Configure.PAY_QUERY_API);
     }
 
     /**
@@ -29,7 +29,7 @@ public class ScanPayQueryService {
         //--------------------------------------------------------------------
         //发送HTTPS的Post请求到API地址
         //--------------------------------------------------------------------
-        String responseString = HttpsRequest.sendPost(Configure.PAY_QUERY_API, scanPayQueryReqData);
+        String responseString = sendPost(scanPayQueryReqData);
 
         return responseString;
     }

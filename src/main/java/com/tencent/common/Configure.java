@@ -64,6 +64,8 @@ public class Configure {
 		Configure.useThreadToDoReport = useThreadToDoReport;
 	}
 
+	public static String HttpsRequestClassName = "com.tencent.common.HttpsRequest";
+
 	public static void setKey(String key) {
 		Configure.key = key;
 	}
@@ -118,6 +120,10 @@ public class Configure {
 
 	public static String getIP(){
 		return ip;
+	}
+
+	public static void setHttpsRequestClassName(String name){
+		HttpsRequestClassName = name;
 	}
 
 }

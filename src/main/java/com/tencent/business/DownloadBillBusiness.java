@@ -20,6 +20,10 @@ import org.slf4j.LoggerFactory;
  */
 public class DownloadBillBusiness {
 
+    public DownloadBillBusiness() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        downloadBillService = new DownloadBillService();
+    }
+
     public interface ResultListener{
         //API返回ReturnCode不合法，支付请求逻辑错误，请仔细检测传过去的每一个参数是否合法，或是看API能否被正常访问
         void onFailByReturnCodeError(DownloadBillResData downloadBillResData);
@@ -41,7 +45,7 @@ public class DownloadBillBusiness {
     //执行结果
     private static String result = "";
 
-    private DownloadBillService downloadBillService = new DownloadBillService();
+    private DownloadBillService downloadBillService;
 
     /**
      * 请求对账单下载服务

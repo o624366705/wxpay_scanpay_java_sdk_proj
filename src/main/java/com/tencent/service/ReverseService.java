@@ -11,7 +11,11 @@ import com.tencent.protocol.reverse_protocol.ReverseReqData;
  * Date: 2014/10/29
  * Time: 16:04
  */
-public class ReverseService {
+public class ReverseService extends BaseService{
+
+    public ReverseService() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        super(Configure.REVERSE_API);
+    }
 
     /**
      * 请求撤销服务
@@ -24,7 +28,7 @@ public class ReverseService {
         //--------------------------------------------------------------------
         //发送HTTPS的Post请求到API地址
         //--------------------------------------------------------------------
-        String responseString = HttpsRequest.sendPost(Configure.REVERSE_API, reverseReqData);
+        String responseString = sendPost(reverseReqData);
 
         return responseString;
     }

@@ -14,10 +14,10 @@ import java.security.UnrecoverableKeyException;
  * Date: 2014/10/29
  * Time: 16:03
  */
-public class ScanPayService{
+public class ScanPayService extends BaseService{
 
-    public ScanPayService(){
-
+    public ScanPayService() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        super(Configure.PAY_API);
     }
 
     /**
@@ -31,7 +31,7 @@ public class ScanPayService{
         //--------------------------------------------------------------------
         //发送HTTPS的Post请求到API地址
         //--------------------------------------------------------------------
-        String responseString = HttpsRequest.sendPost(Configure.PAY_API, scanPayReqData);
+        String responseString = sendPost(scanPayReqData);
 
         return responseString;
     }

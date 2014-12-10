@@ -7,6 +7,7 @@ com\tencent\common\Configure.class
 com\tencent\protocol\reverse_protocol\ReverseReqData.class
 com\tencent\protocol\pay_protocol\ScanPayReqData.class
 com\tencent\business\DownloadBillBusiness.class
+com\tencent\service\IServiceRequest.class
 com\tencent\common\report\protocol\ReportReqData.class
 com\tencent\protocol\pay_query_protocol\ScanPayQueryResData.class
 com\tencent\protocol\pay_protocol\ScanPayResData.class
@@ -34,11 +35,13 @@ com\tencent\business\RefundBusiness.class
 com\tencent\service\ReverseService.class
 com\tencent\protocol\refund_query_protocol\RefundQueryReqData.class
 com\tencent\common\report\ReporterFactory.class
+com\tencent\common\HttpsRequest$ResultListener.class
 com\tencent\business\ScanPayBusiness.class
 com\tencent\WXPay.class
 com\tencent\common\Util.class
 com\tencent\common\HttpsRequest.class
 com\tencent\business\RefundBusiness$ResultListener.class
+com\tencent\service\BaseService.class
 com\tencent\business\DownloadBillBusiness$ResultListener.class
 com\tencent\service\RefundService.class
 com\tencent\protocol\refund_query_protocol\RefundQueryResData.class

@@ -1,5 +1,6 @@
 package com.tencent.common;
 
+import com.tencent.service.IServiceRequest;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
@@ -31,26 +32,37 @@ import java.security.cert.CertificateException;
  * Date: 2014/10/29
  * Time: 14:36
  */
-public class HttpsRequest {
+public class HttpsRequest implements IServiceRequest{
+
+    public interface ResultListener {
+
+
+        public void onConnectionPoolTimeoutError();
+
+    }
 
     private static Log log = new Log(LoggerFactory.getLogger(HttpsRequest.class));
 
     //表示请求器是否已经做了初始化工作
-    private static boolean hasInit = false;
+    private boolean hasInit = false;
 
     //连接超时时间，默认10秒
-    private static int socketTimeout = 10000;
+    private int socketTimeout = 10000;
 
     //传输超时时间，默认30秒
-    private static int connectTimeout = 30000;
+    private int connectTimeout = 30000;
 
     //请求器的配置
-    private static RequestConfig requestConfig;
+    private RequestConfig requestConfig;
 
     //HTTP请求器
-    private static CloseableHttpClient httpClient;
+    private CloseableHttpClient httpClient;
 
-    private static void init() throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
+    public HttpsRequest() throws UnrecoverableKeyException, KeyManagementException, NoSuchAlgorithmException, KeyStoreException, IOException {
+        init();
+    }
+
+    private void init() throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
 
         KeyStore keyStore = KeyStore.getInstance("PKCS12");
         FileInputStream instream = new FileInputStream(new File(Configure.getCertLocalPath()));//加载本地的证书进行https加密传输
@@ -98,7 +110,7 @@ public class HttpsRequest {
      * @throws KeyManagementException
      */
 
-    public static String sendPost(String url, Object xmlObj) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
+    public String sendPost(String url, Object xmlObj) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
 
         if (!hasInit) {
             init();
@@ -158,8 +170,8 @@ public class HttpsRequest {
      *
      * @param socketTimeout 连接时长，默认10秒
      */
-    public static void setSocketTimeout(int socketTimeout) {
-        HttpsRequest.socketTimeout = socketTimeout;
+    public void setSocketTimeout(int socketTimeout) {
+        socketTimeout = socketTimeout;
         resetRequestConfig();
     }
 
@@ -168,13 +180,13 @@ public class HttpsRequest {
      *
      * @param connectTimeout 传输时长，默认30秒
      */
-    public static void setConnectTimeout(int connectTimeout) {
-        HttpsRequest.connectTimeout = connectTimeout;
+    public void setConnectTimeout(int connectTimeout) {
+        connectTimeout = connectTimeout;
         resetRequestConfig();
     }
 
-    private static void resetRequestConfig(){
-        HttpsRequest.requestConfig = RequestConfig.custom().setSocketTimeout(HttpsRequest.socketTimeout).setConnectTimeout(HttpsRequest.connectTimeout).build();
+    private void resetRequestConfig(){
+        requestConfig = RequestConfig.custom().setSocketTimeout(socketTimeout).setConnectTimeout(connectTimeout).build();
     }
 
     /**
@@ -182,7 +194,7 @@ public class HttpsRequest {
      *
      * @param requestConfig 设置HttpsRequest的请求器配置
      */
-    public static void setRequestConfig(RequestConfig requestConfig) {
-        HttpsRequest.requestConfig = requestConfig;
+    public void setRequestConfig(RequestConfig requestConfig) {
+        requestConfig = requestConfig;
     }
 }

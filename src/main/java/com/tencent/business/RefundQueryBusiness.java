@@ -23,6 +23,10 @@ import java.util.List;
  */
 public class RefundQueryBusiness {
 
+    public RefundQueryBusiness() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        refundQueryService = new RefundQueryService();
+    }
+
     public interface ResultListener{
         //API返回ReturnCode不合法，支付请求逻辑错误，请仔细检测传过去的每一个参数是否合法，或是看API能否被正常访问
         void onFailByReturnCodeError(RefundQueryResData refundQueryResData);
@@ -50,7 +54,7 @@ public class RefundQueryBusiness {
     //查询到的结果
     private static String orderListResult = "";
 
-    private RefundQueryService refundQueryService = new RefundQueryService();
+    private RefundQueryService refundQueryService;
 
     public String getOrderListResult() {
         return orderListResult;

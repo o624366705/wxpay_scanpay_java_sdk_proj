@@ -11,7 +11,11 @@ import com.tencent.protocol.refund_query_protocol.RefundQueryReqData;
  * Date: 2014/10/29
  * Time: 16:04
  */
-public class RefundQueryService {
+public class RefundQueryService extends BaseService{
+
+    public RefundQueryService() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        super(Configure.REFUND_QUERY_API);
+    }
 
     /**
      * 请求退款查询服务
@@ -24,7 +28,7 @@ public class RefundQueryService {
         //--------------------------------------------------------------------
         //发送HTTPS的Post请求到API地址
         //--------------------------------------------------------------------
-        String responseString = HttpsRequest.sendPost(Configure.REFUND_QUERY_API, refundQueryReqData);
+        String responseString = sendPost(refundQueryReqData);
 
         return responseString;
     }

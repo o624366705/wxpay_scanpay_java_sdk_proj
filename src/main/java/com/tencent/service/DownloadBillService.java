@@ -11,7 +11,11 @@ import com.tencent.protocol.downloadbill_protocol.DownloadBillReqData;
  * Date: 2014/10/29
  * Time: 16:04
  */
-public class DownloadBillService {
+public class DownloadBillService extends BaseService{
+
+    public DownloadBillService() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        super(Configure.DOWNLOAD_BILL_API);
+    }
 
     //ALL，返回当日所有订单信息，默认值
     public static final String BILL_TYPE_ALL = "ALL";
@@ -37,7 +41,7 @@ public class DownloadBillService {
         //--------------------------------------------------------------------
         //发送HTTPS的Post请求到API地址
         //--------------------------------------------------------------------
-        String responseString = HttpsRequest.sendPost(Configure.DOWNLOAD_BILL_API, downloadBillReqData);
+        String responseString = sendPost(downloadBillReqData);
 
         return responseString;
     }

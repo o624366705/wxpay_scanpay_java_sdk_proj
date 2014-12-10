@@ -27,6 +27,12 @@ import static java.lang.Thread.sleep;
  */
 public class ScanPayBusiness {
 
+    public ScanPayBusiness() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        scanPayService = new ScanPayService();
+        scanPayQueryService = new ScanPayQueryService();
+        reverseService = new ReverseService();
+    }
+
     public interface ResultListener {
 
         //API返回ReturnCode不合法，支付请求逻辑错误，请仔细检测传过去的每一个参数是否合法，或是看API能否被正常访问
@@ -69,11 +75,11 @@ public class ScanPayBusiness {
     //每次调用撤销API的等待时间
     private int waitingTimeBeforeReverseServiceInvoked = 5000;
 
-    private ScanPayService scanPayService = new ScanPayService();
+    private ScanPayService scanPayService;
 
-    private ScanPayQueryService scanPayQueryService = new ScanPayQueryService();
+    private ScanPayQueryService scanPayQueryService;
 
-    private ReverseService reverseService = new ReverseService();
+    private ReverseService reverseService;
 
     /**
      * 直接执行被扫支付业务逻辑（包含最佳实践流程）
@@ -412,4 +418,5 @@ public class ScanPayBusiness {
     public void setReverseService(ReverseService service) {
         reverseService = service;
     }
+
 }

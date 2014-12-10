@@ -20,6 +20,10 @@ import org.slf4j.LoggerFactory;
  */
 public class RefundBusiness {
 
+    public RefundBusiness() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        refundService = new RefundService();
+    }
+
     public interface ResultListener{
         //API返回ReturnCode不合法，支付请求逻辑错误，请仔细检测传过去的每一个参数是否合法，或是看API能否被正常访问
         void onFailByReturnCodeError(RefundResData refundResData);
@@ -44,7 +48,7 @@ public class RefundBusiness {
     //执行结果
     private static String result = "";
 
-    private RefundService refundService = new RefundService();
+    private RefundService refundService;
 
     /**
      * 调用退款业务逻辑

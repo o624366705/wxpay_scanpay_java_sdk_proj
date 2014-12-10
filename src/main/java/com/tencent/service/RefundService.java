@@ -11,7 +11,11 @@ import com.tencent.protocol.refund_protocol.RefundReqData;
  * Date: 2014/10/29
  * Time: 16:04
  */
-public class RefundService {
+public class RefundService extends BaseService{
+
+    public RefundService() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        super(Configure.REFUND_API);
+    }
 
     /**
      * 请求退款服务
@@ -24,7 +28,7 @@ public class RefundService {
         //--------------------------------------------------------------------
         //发送HTTPS的Post请求到API地址
         //--------------------------------------------------------------------
-        String responseString = HttpsRequest.sendPost(Configure.REFUND_API, refundReqData);
+        String responseString = sendPost(refundReqData);
 
         return responseString;
     }
