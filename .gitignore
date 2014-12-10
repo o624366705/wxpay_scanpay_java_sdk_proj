@@ -44,3 +44,4 @@ Temporary Items
 
 *.svn-base
 .svn
+.svn/wc.db
