@@ -36,7 +36,7 @@
 1.  基础配置组件（Configure）
 该组件用来从wxpay.properties里面获取到跟商户相关的几个关键配置信息。
 2.  HTTPS请求器（HttpsRequest）
-发HTTPS请求的底层封装。
+发HTTPS请求的底层封装。（这个请求器商户还可以换成自己的，具体如何自定义请看<a href="https://github.com/grz/wxpay_scanpay_java_demo_proj#user-content-%E9%AB%98%E7%BA%A7%E8%87%AA%E5%AE%9A%E4%B9%892%E4%BD%BF%E7%94%A8%E8%87%AA%E5%B7%B1%E7%9A%84https%E8%AF%B7%E6%B1%82%E5%99%A8" target="_blank">"高级自定义：2）使用自己的Https请求器"</a>）
 3.  随机数生成器（RandomStringGenerator）
 用来生成指定长度的随机数。
 4.  MD5加密算法（MD5）
