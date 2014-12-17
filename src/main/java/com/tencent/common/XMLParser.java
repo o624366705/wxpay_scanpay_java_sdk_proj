@@ -1,5 +1,6 @@
 package com.tencent.common;
 
+import com.tencent.protocol.pay_query_protocol.CouponData;
 import com.tencent.protocol.refund_query_protocol.RefundOrderData;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -57,6 +58,39 @@ public class XMLParser {
 
         return list;
     }
+
+
+    /**
+     * 从payQueryResponseString里面解析出退款订单数据
+     * @param payQueryResponseString RefundQuery API返回的数据
+     * @return 因为订单数据有可能是多个，所以返回一个列表
+     */
+    public static List<CouponData> getCouponDataList(String payQueryResponseString) throws IOException, SAXException, ParserConfigurationException {
+        List list = new ArrayList();
+
+        Map<String,Object> map = XMLParser.getMapFromXML(payQueryResponseString);
+
+        int count = Integer.parseInt((String) map.get("coupon_count"));
+        Util.log("count:" + count);
+
+        if(count<1){
+            return list;
+        }
+
+        CouponData couponData;
+
+        for(int i=0;i<count;i++){
+            couponData = new CouponData();
+            couponData.setCoupon_batch_id(Util.getStringFromMap(map,"coupon_batch_id_" + i,""));
+            couponData.setCoupon_id(Util.getStringFromMap(map,"coupon_id_" + i,""));
+            couponData.setCoupon_fee(Util.getStringFromMap(map,"coupon_fee_" + i,""));
+            list.add(couponData);
+        }
+
+        return list;
+    }
+
+
 
     public static Map<String,Object> getMapFromXML(String xmlString) throws ParserConfigurationException, IOException, SAXException {
 

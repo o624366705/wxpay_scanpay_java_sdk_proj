@@ -51,7 +51,7 @@ public class RefundQueryBusiness {
     //执行结果
     private static String result = "";
 
-    //查询到的结果
+    //查询到的退款结果
     private static String orderListResult = "";
 
     private RefundQueryService refundQueryService;

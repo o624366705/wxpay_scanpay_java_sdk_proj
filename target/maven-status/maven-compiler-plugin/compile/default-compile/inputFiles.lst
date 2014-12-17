@@ -25,6 +25,7 @@ C:\MySVN\MyGit\wxpay_scanpay_java_sdk_proj\src\main\java\com\tencent\common\MD5.
 C:\MySVN\MyGit\wxpay_scanpay_java_sdk_proj\src\main\java\com\tencent\common\report\Reporter.java
 C:\MySVN\MyGit\wxpay_scanpay_java_sdk_proj\src\main\java\com\tencent\protocol\reverse_protocol\ReverseReqData.java
 C:\MySVN\MyGit\wxpay_scanpay_java_sdk_proj\src\main\java\com\tencent\common\Configure.java
+C:\MySVN\MyGit\wxpay_scanpay_java_sdk_proj\src\main\java\com\tencent\protocol\pay_query_protocol\CouponData.java
 C:\MySVN\MyGit\wxpay_scanpay_java_sdk_proj\src\main\java\com\tencent\service\ScanPayQueryService.java
 C:\MySVN\MyGit\wxpay_scanpay_java_sdk_proj\src\main\java\com\tencent\common\XMLParser.java
 C:\MySVN\MyGit\wxpay_scanpay_java_sdk_proj\src\main\java\com\tencent\protocol\pay_query_protocol\ScanPayQueryReqData.java

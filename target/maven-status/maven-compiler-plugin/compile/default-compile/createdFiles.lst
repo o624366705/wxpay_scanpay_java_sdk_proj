@@ -35,6 +35,7 @@ com\tencent\business\RefundBusiness.class
 com\tencent\service\ReverseService.class
 com\tencent\protocol\refund_query_protocol\RefundQueryReqData.class
 com\tencent\common\report\ReporterFactory.class
+com\tencent\protocol\pay_query_protocol\CouponData.class
 com\tencent\common\HttpsRequest$ResultListener.class
 com\tencent\business\ScanPayBusiness.class
 com\tencent\WXPay.class
