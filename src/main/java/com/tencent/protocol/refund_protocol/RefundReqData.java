@@ -28,6 +28,7 @@ public class RefundReqData {
     private int refund_fee = 0;
     private String refund_fee_type = "CNY";
     private String op_user_id = "";
+    private String sdk_version = "";
 
     /**
      * 请求退款服务
@@ -41,6 +42,8 @@ public class RefundReqData {
      * @param refundFeeType 货币类型，符合ISO 4217标准的三位字母代码，默认为CNY（人民币）
      */
     public RefundReqData(String transactionID,String outTradeNo,String deviceInfo,String outRefundNo,int totalFee,int refundFee,String opUserID,String refundFeeType){
+
+        setSdk_version(Configure.getSdkVersion());
 
         //微信分配的公众号ID（开通公众号之后可以获取到）
         setAppid(Configure.getAppid());
@@ -168,6 +171,14 @@ public class RefundReqData {
 
     public void setRefund_fee_type(String refund_fee_type) {
         this.refund_fee_type = refund_fee_type;
+    }
+
+    public String getSdk_version(){
+        return sdk_version;
+    }
+
+    public void setSdk_version(String sdk_version) {
+        this.sdk_version = sdk_version;
     }
 
     public Map<String,Object> toMap(){

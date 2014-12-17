@@ -22,6 +22,7 @@ public class ScanPayQueryReqData {
     private String out_trade_no = "";
     private String nonce_str = "";
     private String sign = "";
+    private String sdk_version = "";
 
     /**
      * 请求支付查询服务
@@ -35,6 +36,8 @@ public class ScanPayQueryReqData {
         //--------------------------------------------------------------------
         //以下是测试数据，请商户按照自己的实际情况填写具体的值进去
         //--------------------------------------------------------------------
+
+        setSdk_version(Configure.getSdkVersion());
 
         //微信分配的公众号ID（开通公众号之后可以获取到）
         setAppid(Configure.getAppid());
@@ -104,6 +107,14 @@ public class ScanPayQueryReqData {
 
     public void setSign(String sign) {
         this.sign = sign;
+    }
+
+    public String getSdk_version(){
+        return sdk_version;
+    }
+
+    public void setSdk_version(String sdk_version) {
+        this.sdk_version = sdk_version;
     }
 
     public Map<String,Object> toMap(){

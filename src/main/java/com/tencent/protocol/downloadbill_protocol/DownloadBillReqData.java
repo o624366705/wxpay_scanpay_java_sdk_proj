@@ -22,6 +22,7 @@ public class DownloadBillReqData {
     private String sign = "";
     private String bill_date = "";
     private String bill_type = "";
+    private String sdk_version = "";
 
     /**
      * 请求对账单下载服务
@@ -34,6 +35,8 @@ public class DownloadBillReqData {
     REVOKED，已撤销的订单
      */
     public DownloadBillReqData(String deviceInfo,String billDate,String billType){
+
+        setSdk_version(Configure.getSdkVersion());
 
         //微信分配的公众号ID（开通公众号之后可以获取到）
         setAppid(Configure.getAppid());
@@ -113,6 +116,14 @@ public class DownloadBillReqData {
 
     public void setBill_type(String bill_type) {
         this.bill_type = bill_type;
+    }
+
+    public String getSdk_version(){
+        return sdk_version;
+    }
+
+    public void setSdk_version(String sdk_version) {
+        this.sdk_version = sdk_version;
     }
 
     public Map<String,Object> toMap(){

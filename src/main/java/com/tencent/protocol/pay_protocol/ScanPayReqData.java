@@ -34,6 +34,7 @@ public class ScanPayReqData {
     private String time_expire = "";
     private String goods_tag = "";
     private String auth_code = "";
+    private String sdk_version;
 
     /**
      * @param authCode 这个是扫码终端设备从用户手机上扫取到的支付授权号，这个号是跟用户用来支付的银行卡绑定的，有效期是1分钟
@@ -48,6 +49,8 @@ public class ScanPayReqData {
      * @param goodsTag 商品标记，微信平台配置的商品标记，用于优惠券或者满减使用
      */
     public ScanPayReqData(String authCode,String body,String attach,String outTradeNo,int totalFee,String deviceInfo,String spBillCreateIP,String timeStart,String timeExpire,String goodsTag){
+
+        setSdk_version(Configure.getSdkVersion());
 
         //微信分配的公众号ID（开通公众号之后可以获取到）
         setAppid(Configure.getAppid());
@@ -206,6 +209,14 @@ public class ScanPayReqData {
 
     public void setAuth_code(String auth_code) {
         this.auth_code = auth_code;
+    }
+
+    public String getSdk_version(){
+        return sdk_version;
+    }
+
+    public void setSdk_version(String sdk_version) {
+        this.sdk_version = sdk_version;
     }
 
     public Map<String,Object> toMap(){

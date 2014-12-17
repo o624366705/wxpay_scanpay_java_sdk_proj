@@ -39,6 +39,7 @@ public class ReportReqData {
     private String err_code;
     private String err_code_des;
     private String out_trade_no;
+    private String sdk_version;
 
     /**
      * 请求统计上报API
@@ -54,6 +55,9 @@ public class ReportReqData {
      * @param userIp 发起接口调用时的机器IP
      */
     public ReportReqData(String deviceInfo, String interfaceUrl,int executeTimeCost, String returnCode,String returnMsg,String resultCode,String errCode,String errCodeDes, String outTradeNo,String userIp){
+
+        setSdk_version(Configure.getSdkVersion());
+
         //微信分配的公众号ID（开通公众号之后可以获取到）
         setAppid(Configure.getAppid());
 
@@ -208,6 +212,14 @@ public class ReportReqData {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getSdk_version() {
+        return sdk_version;
+    }
+
+    public void setSdk_version(String sdk_version) {
+        this.sdk_version = sdk_version;
     }
 
     public Map<String,Object> toMap(){

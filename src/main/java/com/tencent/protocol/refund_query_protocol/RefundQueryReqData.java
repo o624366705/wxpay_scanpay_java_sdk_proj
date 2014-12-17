@@ -22,6 +22,7 @@ public class RefundQueryReqData {
     private String sign = "";
     private String transaction_id = "";
     private String out_trade_no = "";
+    private String sdk_version = "";
 
     /**
      * 请求退款查询服务
@@ -33,6 +34,8 @@ public class RefundQueryReqData {
      */
 
     public RefundQueryReqData(String transactionID,String outTradeNo,String deviceInfo,String outRefundNo,String refundID){
+
+        setSdk_version(Configure.getSdkVersion());
 
         //微信分配的公众号ID（开通公众号之后可以获取到）
         setAppid(Configure.getAppid());
@@ -133,6 +136,14 @@ public class RefundQueryReqData {
 
     public void setRefund_id(String refund_id) {
         this.refund_id = refund_id;
+    }
+
+    public String getSdk_version(){
+        return sdk_version;
+    }
+
+    public void setSdk_version(String sdk_version) {
+        this.sdk_version = sdk_version;
     }
 
     private String out_refund_no;
