@@ -57,10 +57,10 @@ public class Util {
     }
 
 
-    public static InputStream getStringStream(String sInputString) {
+    public static InputStream getStringStream(String sInputString) throws UnsupportedEncodingException {
         ByteArrayInputStream tInputStringStream = null;
         if (sInputString != null && !sInputString.trim().equals("")) {
-            tInputStringStream = new ByteArrayInputStream(sInputString.getBytes());
+            tInputStringStream = new ByteArrayInputStream(sInputString.getBytes("UTF-8"));
         }
         return tInputStringStream;
     }

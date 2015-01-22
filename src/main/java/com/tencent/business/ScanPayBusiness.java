@@ -58,7 +58,7 @@ public class ScanPayBusiness {
         void onFail(ScanPayResData scanPayResData);
 
         //支付成功
-        void onSuccess(ScanPayResData scanPayResData);
+        void onSuccess(ScanPayResData scanPayResData,String transactionID);
 
     }
 
@@ -80,6 +80,8 @@ public class ScanPayBusiness {
     private ScanPayQueryService scanPayQueryService;
 
     private ReverseService reverseService;
+
+    private String transactionID = "";
 
     /**
      * 直接执行被扫支付业务逻辑（包含最佳实践流程）
@@ -175,7 +177,12 @@ public class ScanPayBusiness {
                 //--------------------------------------------------------------------
 
                 log.i("【一次性支付成功】");
-                resultListener.onSuccess(scanPayResData);
+
+                if(!scanPayResData.getTransaction_id().equals("")){
+                    transactionID = scanPayResData.getTransaction_id();
+                }
+
+                resultListener.onSuccess(scanPayResData,transactionID);
             }else{
 
                 //出现业务错误
@@ -216,7 +223,7 @@ public class ScanPayBusiness {
                     //表示有可能单次消费超过300元，或是免输密码消费次数已经超过当天的最大限制，这个时候提示用户输入密码，商户自己隔一段时间去查单，查询一定次数，看用户是否已经输入了密码
                     if (doPayQueryLoop(payQueryLoopInvokedCount, outTradeNo)) {
                         log.i("【需要用户输入密码、查询到支付成功】");
-                        resultListener.onSuccess(scanPayResData);
+                        resultListener.onSuccess(scanPayResData,transactionID);
                     } else {
                         log.i("【需要用户输入密码、在一定时间内没有查询到支付成功、走撤销流程】");
                         doReverseLoop(outTradeNo);
@@ -230,7 +237,7 @@ public class ScanPayBusiness {
 
                     if (doPayQueryLoop(payQueryLoopInvokedCount, outTradeNo)) {
                         log.i("【支付扣款未知失败、查询到支付成功】");
-                        resultListener.onSuccess(scanPayResData);
+                        resultListener.onSuccess(scanPayResData,transactionID);
                     } else {
                         log.i("【支付扣款未知失败、在一定时间内没有查询到支付成功、走撤销流程】");
                         doReverseLoop(outTradeNo);
@@ -273,6 +280,9 @@ public class ScanPayBusiness {
             return false;
         } else {
             if (scanPayQueryResData.getResult_code().equals("SUCCESS")) {//业务层成功
+                if(!scanPayQueryResData.getTransaction_id().equals("")){
+                    transactionID = scanPayQueryResData.getTransaction_id();
+                }
                 if (scanPayQueryResData.getTrade_state().equals("SUCCESS")) {
                     //表示查单结果为“支付成功”
                     log.i("查询到订单支付成功");
